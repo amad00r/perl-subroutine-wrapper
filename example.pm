@@ -4,16 +4,16 @@ package example;
 
 
 sub conv_hexstring_to_string {
-	my ($hexstr)=@_;
-	if ($hexstr eq "") { return }
-	my $tmp=$hexstr;                         
-	$tmp =~ s/\s0\d//g;
-	$tmp =~ s/[\"\s]+//g;
-	if ($tmp =~ /^([A-F0-9]{5,100})/) { 
-		$hexstr=$1;
-		$hexstr =~ s/([A-F0-9][A-F0-9])/pack("C",hex($1))/eg;
-	}
-	return $hexstr;
+    my ($hexstr)=@_;
+    if ($hexstr eq "") { return }
+    my $tmp=$hexstr;                         
+    $tmp =~ s/\s0\d//g;
+    $tmp =~ s/[\"\s]+//g;
+    if ($tmp =~ /^([A-F0-9]{5,100})/) { 
+        $hexstr=$1;
+        $hexstr =~ s/([A-F0-9][A-F0-9])/pack("C",hex($1))/eg;
+    }
+    return $hexstr;
 }
 
 
@@ -28,21 +28,21 @@ sub join {
 
 
 sub parse_parameters {
-	my (@m)=@_;
-	my %params;
-	for (my $n=0; $n<scalar @m; $n++) {
-		if (@m[$n] =~ /^\-(\w+)/ ) {
-			my $key=$1;
-			if (@m[$n+1] !~ /^\-(\w+)/ ) {
-				$params{$key}=@m[++$n]
-			} else { 
-				$params{$key}="" 
-			}
-		} else { 
-			$params{@m[$n]}="" 
-		}
-	}
-	return %params;
+    my (@m)=@_;
+    my %params;
+    for (my $n=0; $n<scalar @m; $n++) {
+        if (@m[$n] =~ /^\-(\w+)/ ) {
+            my $key=$1;
+            if (@m[$n+1] !~ /^\-(\w+)/ ) {
+                $params{$key}=@m[++$n]
+            } else { 
+                $params{$key}="" 
+            }
+        } else { 
+            $params{@m[$n]}="" 
+        }
+    }
+    return %params;
 }
 
 
