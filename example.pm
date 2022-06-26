@@ -31,11 +31,16 @@ sub parse_parameters {
 	my (@m)=@_;
 	my %params;
 	for (my $n=0; $n<scalar @m; $n++) {
-	if (@m[$n] =~ /^\-(\w+)/ ) {
-		my $key=$1;
-		if (@m[$n+1] !~ /^\-(\w+)/ )	{ $params{$key}=@m[++$n]
-		}else 				{ $params{$key}="" }
-	}else { $params{@m[$n]}="" }
+		if (@m[$n] =~ /^\-(\w+)/ ) {
+			my $key=$1;
+			if (@m[$n+1] !~ /^\-(\w+)/ ) {
+				$params{$key}=@m[++$n]
+			} else { 
+				$params{$key}="" 
+			}
+		} else { 
+			$params{@m[$n]}="" 
+		}
 	}
 	return %params;
 }
