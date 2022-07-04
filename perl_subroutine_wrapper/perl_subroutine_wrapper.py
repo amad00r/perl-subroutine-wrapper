@@ -18,6 +18,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from shutil import which
 from json import loads, dumps
+from collections import namedtuple
 from types import NoneType
 from typing import Union
 from jinja2 import Environment, FileSystemLoader
@@ -107,11 +108,15 @@ class Module:
                 are: 'scalar', 'array', 'hash'.
 
         Returns:
-            A dict mapping 'returned', 'stdout' and 'error' with the object that the Perl
-            subroutine has returned translated to a Python object, and the stdout and error
-            as strings. Default values are None. For example:
+            A `PerlCallResult` namedtuple containing 'returned', 'stdout' and 'error' attributes
+            collected from the execution of the Perl subroutine.
+            'returned' can be dict, list, str, int, float, True, False, None.
+            'stdout' can be str, None.
+            'error' can be str, None.
 
-            {'returned': [2, 3, 1, 1], 'stdout': 'Joined :)', 'error': None}
+            For example:
+
+            PerlCallResult(returned=[2, 3, 1, 1], stdout='Joined :)', error=None)
 
         """
 
@@ -133,8 +138,6 @@ class Module:
 
             error = wrapper_call.stderr.read().decode('utf8')
 
-        return {
-            'returned': returned,
-            'stdout': stdout if stdout else None,
-            'error': error if error else None,
-        }
+        PerlCallResult = namedtuple('PerlCallResult', ['returned', 'stdout', 'error'])
+
+        return PerlCallResult(returned, stdout if stdout else None, error if error else None)
