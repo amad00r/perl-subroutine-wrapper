@@ -14,18 +14,21 @@ Valid Perl objects returned are: SCALAR, ARRAY, HASH.
 
 You can install this module from Pypi:
 
-```
-pip install perlwrapper
+```plaintext
+pip install perlsub
 ```
 
 ## Requirements
 
 In order to use this python module you will need to install jinja2, which will help us with generate the Perl intermediary wrapper dinamically when calling subroutines:
-```
+
+```plaintext
 pip install jinja2
 ```
+
 You also need Perl installed in your computer. You can check if it is installed and the version with the command:
-```
+
+```plaintext
 perl -v
 ```
 
@@ -48,7 +51,7 @@ sub join {
 To wrap this subroutine and use it in Python we have to import the module, create a new `Module` instance passing the path of the Perl module, and call the `call` function passing the name of the subroutine, the parameters and the expected Perl object returned like I did in *`example.py`*. `parameters` and `returned_type` can be None.
 
 ```python
-from perlwrapper import Module
+from perlsub import Module
 
 
 example = Module('example.pm')
@@ -61,7 +64,7 @@ join = example.call(
 print(join)
 ```
 
-```
+```plaintext
 Output:
 
 PerlCallResult(returned=[2, 3, 1, 1], stdout='Joined :)', error=None)
