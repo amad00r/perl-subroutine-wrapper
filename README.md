@@ -25,13 +25,34 @@ perl -v
 ## Example of usage
 
 *`example.py`* and *`example.pm`* show us how to use the module.
-In *`example.pm`* we have a subroutine such as `join` that we want to use in our Python script.
+In *`example.pm`* we have a Perl subroutine such as `join` that we want to use in our Python script.
 
-https://github.com/amad00r/perl-subroutine-wrapper/blob/a03ef0297308c55638c429772284969cb5b259f9/example.pm#L20-L27
+```perl
+sub join { 
+     my ($list1, $list2)=@_; 
+     my @list3; 
+     push @list3, @$list1; 
+     push @list3, @$list2; 
+     print "Joined :)"; 
+     return @list3;
+}
+```
 
 To wrap this subroutine and use it in Python we have to import the module, create a new `Module` instance passing the path of the Perl module, and call the `call` function passing the name of the subroutine, the parameters and the expected Perl object returned like I did in *`example.py`*. `parameters` and `returned_type` can be None.
 
-https://github.com/amad00r/perl-subroutine-wrapper/blob/a03ef0297308c55638c429772284969cb5b259f9/example.py#L15-L16
+```python
+from perl_subroutine_wrapper import Module
+
+
+example = Module('example.pm')
+
+join = example.call(
+  subroutine='join', 
+  parameters=[[2, 3], [1, 1]], 
+  return_type='array'
+)
+print(join)
+```
 
 ```
 Output:
