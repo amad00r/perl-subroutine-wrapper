@@ -1,6 +1,6 @@
 package example;
 
-@EXPORT_OK = qw ( conv_hexstring_to_string join parse_parameters );
+@EXPORT_OK = qw ( conv_hexstring_to_string join parse_parameters error );
 
 
 sub conv_hexstring_to_string {

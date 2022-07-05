@@ -1,4 +1,4 @@
-from perl_subroutine_wrapper.perl_subroutine_wrapper import Module
+from perlsub import Module
 
 
 example = Module('example.pm')
