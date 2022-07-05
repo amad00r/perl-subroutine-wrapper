@@ -10,6 +10,13 @@ Valid Python objects passed as parameters are: dict, list, str, int, float, True
 
 Valid Perl objects returned are: SCALAR, ARRAY, HASH.
 
+## Installation
+
+You can install this module from Pypi:
+
+```
+pip install perlwrapper
+```
 
 ## Requirements
 
@@ -41,7 +48,7 @@ sub join {
 To wrap this subroutine and use it in Python we have to import the module, create a new `Module` instance passing the path of the Perl module, and call the `call` function passing the name of the subroutine, the parameters and the expected Perl object returned like I did in *`example.py`*. `parameters` and `returned_type` can be None.
 
 ```python
-from perl_subroutine_wrapper import Module
+from perlwrapper import Module
 
 
 example = Module('example.pm')
